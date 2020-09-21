@@ -1,0 +1,173 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiselect-month</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+</head>
+<style>
+    .bttn1 {
+        width: 50px;
+    }
+
+    .yrbrn {
+        height: 3rem;
+        width: 150px;
+    }
+
+    .btnwd {
+        width: 82px;
+    }
+
+    .btnsub:hover {
+        background-color: #f75050;
+    }
+
+    button.close {
+        padding: 7px;
+        cursor: pointer;
+        background: 0 0;
+        border: 0;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .pointer {
+        cursor: pointer;
+    }
+</style>
+
+<body onload="year();">
+    <div class="container">
+        <div class="row pt-5">
+            <h4>Multi-Select-Month</h4>
+        </div>
+        <div class="row pt-2">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Month</button>
+        </div>
+         <div class="row pt-4">
+             <table class="table" id="month">
+                 <thead class="thead-dark">
+                     <tr>
+                         <th>Year</th>
+                         <th>No of Months Selected</th>
+                     </tr>
+                 </thead>
+             </table>
+         </div>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                          <div class="col-md-8 offset-md-2">
+                              <div class="row">
+                                  <button type="button" id="left" onclick="left();" class="btn btn-light bttn1 mr-3"><i class="fa fa-arrow-circle-left"></i></button>
+                                  <button type="button" id="year" value="2020" class="btn btn-light yrbrn"></button>
+                                  <button type="button" id="right" onclick="right();" class="btn btn-light bttnl ml-3"><i class="fa fa-arrow-circle-right"></i></button>
+                              </div>
+                              <div class="row pt-3">
+                                  <button type="button" id="1" value="Jan" class="btn btn-light btnwd mr-3" onclick="month(this.id);">Jan</button>
+                                  <button type="button" id="2" value="Feb" class="btn btn-light btnwd mr-3" onclick="month(this.id);">Feb</button>
+                                  <button type="button" id="3" value="Mar" class="btn btn-light btnwd mr-3" onclick="month(this.id);">Mar</button>
+                              </div>
+                              <div class="row pt-3">
+                                <button type="button" id="4" value="Apr" class="btn btn-light btnwd mr-3" onclick="month(this.id);">Apr</button>
+                                <button type="button" id="5" value="May" class="btn btn-light btnwd mr-3" onclick="month(this.id);">May</button>
+                                <button type="button" id="6" value="Jun" class="btn btn-light btnwd mr-3" onclick="month(this.id);">Jun</button>
+                            </div>
+                            <div class="row pt-3">
+                                <button type="button" id="7" value="Jul" class="btn btn-light btnwd mr-3" onclick="month(this.id);">Jul</button>
+                                <button type="button" id="8" value="Aug" class="btn btn-light btnwd mr-3" onclick="month(this.id);">Aug</button>
+                                <button type="button" id="9" value="Sep" class="btn btn-light btnwd mr-3" onclick="month(this.id);">Sep</button>
+                            </div>
+                            <div class="row pt-3">
+                                <button type="button" id="10" value="Oct" class="btn btn-light btnwd mr-3" onclick="month(this.id);">Oct</button>
+                                <button type="button" id=11 value="Nov" class="btn btn-light btnwd mr-3" onclick="month(this.id);">Nov</button>
+                                <button type="button" id="12" value="Dec" class="btn btn-light btnwd mr-3" onclick="month(this.id);">Dec</button>
+                            </div>
+                            <div class="row pt-5 pl-5 ml-5">
+                                <button type="button" id="submit" value="submit" class="btn btn-danger btnsub text-center" onclick="submit();">Submit</button>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var n = document.getElementById("year").value;
+    var tot = [];
+    function year(){
+        document.getElementById("year").innerHTML = n;
+        tot.push(n);
+        document.getElementById("submit").disabled = true;
+    }
+    function left(){
+        n = parseInt(n);
+        n = n-1;
+        document.getElementById("year").innerHTML = n;
+        tot = [];
+        for (var i=1; i<13; i++){
+            document.getElementById(i).style.backgroundColor = "";
+        }
+        tot.push(n);
+    }
+    function right(){
+        n = parseInt(n);
+        n = n + 1;
+        document.getElementById("year").innerHTML = n;
+        tot=[];
+        for (var i=1; i<13; i++){
+            document.getElementById(i).style.backgroundColor = "";
+        }
+        tot.push(n);
+    }
+    function month(id){
+        debugger;
+        document.getElementById("submit").disabled = false;
+        var m = document.getElementById(id).value;
+        var mn = tot.includes(m);
+        if (mn == true){
+            const index = tot.indexOf(m);
+            tot.splice(index, 1);
+            document.getElementById(id).style.backgroundColor = "";
+        }
+        else{
+            tot.push(m);
+            document.getElementById(id).style.backgroundColor = "#87CEEB";
+        }
+
+    }
+   function submit(){
+    var tablelength = document.getElementById("month").rows.length;
+    var table = document.getElementById("month");
+    var row = table.insertRow(tablelength);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    cell1.innerHTML = tot[0];
+    tot.shift();
+    cell2.innerHTML = tot;
+    for (var i=1; i<13; i++){
+            document.getElementById(i).style.backgroundColor = "";
+        }
+        tot = [];
+        tot.push(n);
+   }
+</script>
+</html>
